@@ -28,8 +28,6 @@
   "homepage": "https://github.com/Karona-Tourn/rn-popup-modal#readme",
   "dependencies": {
     "prop-types": "^15.7.2",
-    "react": "16.8.6",
-    "react-native": "0.60.5",
     "react-native-responsive-screen": "^1.2.2",
     "rn-tween": "^1.0.4"
   },

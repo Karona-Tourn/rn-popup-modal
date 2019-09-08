@@ -18,6 +18,8 @@ import PropTypes from 'prop-types';
 
 const defaultRadius = Math.min(wp(2), hp(2));
 const hitSlopOffset = Math.min(wp(2), hp(2));
+const defaultDuration = 200;
+const defaultFromScale = 1.1;
 
 const CloseButton = ({ onPress }) => {
   const size = Math.min(wp(6), hp(6));
@@ -96,12 +98,23 @@ export default class RNPopupModal extends React.Component {
   render() {
     const {
       blockBackgroundColor,
-      windowAreaStyle,
+      windowContainerStyle,
       visible,
       onRequestClose,
+      transitionDuration,
+      transitionFromScale,
+      backgroundColor,
       ...restProps
     } = this.props;
     const { width, height } = this.state;
+    const duration =
+      transitionDuration === null || transitionDuration === undefined
+        ? defaultDuration
+        : transitionDuration;
+    const fromScale =
+      transitionFromScale === null || transitionFromScale === undefined
+        ? defaultFromScale
+        : transitionFromScale;
 
     return (
       <Modal
@@ -130,13 +143,13 @@ export default class RNPopupModal extends React.Component {
                   {
                     from: 0,
                     to: 1,
-                    duration: 200,
+                    duration,
                     styleProperty: 'opacity'
                   },
                   {
-                    from: 1.1,
+                    from: fromScale,
                     to: 1,
-                    duration: 200,
+                    duration,
                     styleProperty: 'scale',
                     easing: TweenEasing.linear
                   }
@@ -144,11 +157,11 @@ export default class RNPopupModal extends React.Component {
               }
             }}
             style={{
-              ...StyleSheet.flatten(windowAreaStyle),
+              ...StyleSheet.flatten(windowContainerStyle),
               width: width * 0.8,
               height: height * 0.8
             }}>
-            <View style={defaultStyles.visualWindow}>
+            <View style={{ ...defaultStyles.visualWindow, backgroundColor }}>
               {this._renderHead()}
               {this._renderBody()}
             </View>
@@ -218,14 +231,18 @@ RNPopupModal.defaultProps = {
     'landscape-right',
     'portrait-upside-down'
   ],
-  transparent: true
+  transparent: true,
+  backgroundColor: '#fff'
 };
 
 RNPopupModal.propTypes = {
   title: PropTypes.string,
   blockBackgroundColor: PropTypes.string,
   titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  windowAreaStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  windowContainerStyle: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]),
   headerLineStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   headerContainerStyle: PropTypes.oneOfType([
     PropTypes.object,
@@ -235,7 +252,10 @@ RNPopupModal.propTypes = {
   scrollViewContentContainerStyle: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array
-  ])
+  ]),
+  transitionDuration: PropTypes.number,
+  transitionFromScale: PropTypes.number,
+  backgroundColor: PropTypes.string
 };
 
 const defaultStyles = {

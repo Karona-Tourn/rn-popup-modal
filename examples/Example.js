@@ -1,12 +1,5 @@
 import React, { Fragment } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Button,
-  Text,
-  Image,
-  Dimensions
-} from 'react-native';
+import { SafeAreaView, StyleSheet, Button, Text, Image } from 'react-native';
 import RNPopupModal from '../src/RNPopupModal';
 
 export default class Example extends React.Component {
@@ -14,24 +7,16 @@ export default class Example extends React.Component {
     return (
       <Fragment>
         <SafeAreaView style={styles.container}>
-          <Button
-            title='The Pyrenees'
-            onPress={() => {
-              this._modal.show();
-            }}
-          />
+          <Button title="The Pyrenees" onPress={this._onPressed} />
         </SafeAreaView>
-        <RNPopupModal
-          ref={ref => (this._modal = ref)}
-          title='The Pyrenees'
-          windowAreaStyle={{ height: Dimensions.get('screen').height * 0.7 }}>
+        <RNPopupModal ref={ref => (this._modal = ref)} title="The Pyrenees">
           <Image
             source={{
               uri:
                 'https://www.smartertravel.com/uploads/2012/03/stm4f4fa817459b420120301.jpg'
             }}
             style={styles.image}
-            resizeMode='cover'
+            resizeMode="cover"
           />
           <Text style={styles.title}>
             Best Hidden Destination for Mountain Lovers: The Pyrenees
@@ -49,6 +34,10 @@ export default class Example extends React.Component {
       </Fragment>
     );
   }
+
+  _onPressed = () => {
+    this._modal && this._modal.show();
+  };
 }
 
 const styles = StyleSheet.create({

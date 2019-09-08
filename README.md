@@ -32,10 +32,7 @@ yarn add rn-popup-modal
 ```jsx
 import RNPopupModal from 'rn-popup-modal';
 
-<RNPopupModal
-  ref={ref => (_modal = ref)}
-  title='The Pyrenees'
-  windowAreaStyle={{ height: hp(70) }}>
+<RNPopupModal ref={ref => (this._modal = ref)} title='The Pyrenees'>
   <Image
     source={{
       uri:
@@ -55,7 +52,7 @@ import RNPopupModal from 'rn-popup-modal';
     Ordesa, and Aiguestortes; hearty regional cuisine; the running of the bulls
     in Pamplona—and even duty-free shopping in tiny Andorra.”
   </Text>
-</RNPopupModal>;
+</RNPopupModal>
 
 // Call the method to show the popup modal
 _modal.show();
@@ -64,6 +61,28 @@ _modal.show();
 ## Usage
 
 ### Available props
+
+| Name                            | Type   | Default         | Description                                                        |
+| ------------------------------- | ------ | --------------- | ------------------------------------------------------------------ |
+| title                           | string |                 | String as title displayed on top header of the modal               |
+| titleStyle                      | style  |                 | Style of the title Text component                                  |
+| blockBackgroundColor            | color  | rgba(0,0,0,0.5) | Background color of the blocking component behind the popup window |
+| backgroundColor                 | color  | #ffffff         | Background color of the popup modal window                         |
+| windowContainerStyle            | style  |                 | Container style for the popup modal window                         |
+| headerLineStyle                 | style  |                 | Style of divider line between header and body                      |
+| headerContainerStyle            | style  |                 | Container style for the header                                     |
+| scrollViewStyle                 | style  |                 | Scroll view style                                                  |
+| scrollViewContentContainerStyle | style  |                 | Content container style for the scroll view                        |
+| transitionDuration              | number | 200             | Transition duration to animate the popup modal                     |
+| transitionFromScale             | number | 1.1             | Start scale for transiting the popup modal                         |
+
+also inherit [Modal Props](https://facebook.github.io/react-native/docs/modal)
+
+### Available instance method
+
+| Name | Description          |
+| ---- | -------------------- |
+| show | Show the popup modal |
 
 ## License
 
